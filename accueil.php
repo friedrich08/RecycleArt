@@ -124,17 +124,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['contact_submit'])) {
             ],
             [
                 "id" => 4, 
-                "name" => "Isolant thermique textile", 
-                "price" => "15000 FCFA",
-                "image" => "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", 
-                "description" => "Matériau d’isolation haute performance fabriqué à partir de vêtements recyclés, pour une maison éco-énergétique.",
-                "category" => "Materiel de construction"
+                "name" => "Eclats de Tissu", 
+                "price" => "27000 FCFA",
+                "image" => "img/tableau.jpg", 
+                "description" => "Tableau écoresponsable conçu à partir de déchets textiles, alliant art, couleur et recyclage pour une décoration originale et engagée
+
+
+
+
+
+
+
+
+.
+
+",
+                "category" => "Objet de decoration"
             ],
             [
                 "id" => 5, 
                 "name" => "Tabouret en denim recyclé", 
                 "price" => "2000 FCFA",
-                "image" => "https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=800", 
+                "image" => "img/tabouret.jpeg", 
                 "description" => "Tabouret robuste et stylé, rembourré avec des chutes de jeans recyclés, parfait pour un intérieur durable.",
                 "category" => "Meuble"
             ],
@@ -150,7 +161,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['contact_submit'])) {
                 "id" => 7, 
                 "name" => "Chaise en fibres textiles", 
                 "price" => "1500 FCFA",
-                "image" => "https://images.pexels.com/photos/1148955/pexels-photo-1148955.jpeg?auto=compress&cs=tinysrgb&w=800", 
+                "image" => "img/canape.jpeg", 
                 "description" => "Chaise légère et résistante, conçue à partir de fibres de vêtements usagés, pour une assise écologique.",
                 "category" => "Meuble"
             ],
@@ -182,7 +193,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['contact_submit'])) {
                 "id" => 11, 
                 "name" => "Table basse en textile compressé", 
                 "price" => "6000 FCFA",
-                "image" => "https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg?auto=compress&cs=tinysrgb&w=800", 
+                "image" => "img/chaise1.jpeg", 
                 "description" => "Table basse originale fabriquée avec des déchets textiles compressés, pour un salon éco-responsable.",
                 "category" => "Meuble"
             ],
@@ -193,6 +204,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['contact_submit'])) {
                 "image" => "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", 
                 "description" => "Poutre légère en fibres textiles recyclées, pour une touche rustique et écologique dans votre intérieur.",
                 "category" => "Materiel de construction"
+            ],
+            [
+                "id" => 13, 
+                "name" => "Vase en textile tressé", 
+                "price" => "5500 FCFA",
+                "image" => "img/vase.jpg",
+                "description" => "Vase décoratif fabriqué à partir de chutes de tissus tressés, pour une touche naturelle dans votre intérieur.", 
+                "category" => "Objet de decoration"
+            ],
+            [
+                "id" => 14, 
+                "name" => "Chaise originale en textile",
+                "price" => "1500 FCFA", 
+                "image" => "img/chaise2.jpg", 
+                "description" => "Chaise unique fabriquée à partir de textiles recyclés, alliant confort et design éco-responsable.",
+                "category" => "Meuble"
+                
             ]
         ];
 
