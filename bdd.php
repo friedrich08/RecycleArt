@@ -4,7 +4,7 @@ class Database {
     private $host = 'localhost';
     private $username = 'root'; // Remplacez par votre utilisateur MySQL
     private $password = ''; // Remplacez par votre mot de passe MySQL
-    private $dbname = 'myshop'; // Remplacez par le nom de votre base de données
+    private $dbname = 'recycleart'; // Remplacez par le nom de votre base de données
     private $conn;
 
     public function __construct() {

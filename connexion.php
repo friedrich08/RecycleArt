@@ -1,46 +1,12 @@
 <?php
-session_start();  // Démarrer la session pour gérer l'authentification
+session_start();
 require 'bdd.php';
-// Créer une instance de la classe Database
-$database = new Database();
-$conn = $database->getConnection(); // Obtenir la connexion
 
-//if ($conn) {
-   // echo "Connected successfully";
-//} else {
-   // echo "Connection failed";
-//}
+$database = new Database();
+$conn = $database->getConnection();
 
 // Partie Inscription
-if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['email']) && isset($_POST['password'])) {
-    $nom = $conn->real_escape_string($_POST['nom']);
-    $prenom = $conn->real_escape_string($_POST['prenom']);
-    $email = $conn->real_escape_string($_POST['email']);
-    $password = password_hash(trim($_POST['password']), PASSWORD_BCRYPT);  // Hachage du mot de passe
-
-
-    // Vérification si l'email existe déjà
-    $checkQuery = "SELECT * FROM client WHERE email='$email'";
-    $result = $conn->query($checkQuery);
-
-    if ($result->num_rows > 0) {
-        echo "<script>alert('Cet email est déjà utilisé.');</script>";
-    } else {
-        $sql = "INSERT INTO client (nom, prenom, email, password) VALUES ('$nom', '$prenom', '$email', '$password')";
-        if ($conn->query($sql) === TRUE) {
-            // Inscription réussie, démarrage de session automatique
-            $_SESSION['client'] = $email; // Stocke l'email dans la session
-            header("Location: accueil.php"); // Redirige vers le tableau de bord
-            exit();
-        } else {
-            echo "<script>alert('Erreur : " . $conn->error . "');</script>";
-        }
-    }
-
-}
-
-// Partie Connexion
-if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['email']) && isset($_POST['password'])) {
+if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['email']) && isset($_POST['password']) && !isset($_POST['login'])) {
     $nom = $conn->real_escape_string($_POST['nom']);
     $prenom = $conn->real_escape_string($_POST['prenom']);
     $email = $conn->real_escape_string($_POST['email']);
@@ -48,6 +14,7 @@ if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['email']) &&
 
     $checkQuery = "SELECT * FROM client WHERE email='$email'";
     $result = $conn->query($checkQuery);
+
     if ($result->num_rows > 0) {
         echo "<script>alert('Cet email est déjà utilisé.');</script>";
     } else {
@@ -63,7 +30,8 @@ if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['email']) &&
     }
 }
 
-if (isset($_POST['email']) && isset($_POST['password'])) {
+// Partie Connexion
+if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['login'])) {
     $email = $conn->real_escape_string($_POST['email']);
     $password = trim($_POST['password']);
 
@@ -74,7 +42,14 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
         if (password_verify($password, $user['password'])) {
             $_SESSION['client'] = $email;
             $_SESSION['logged_in'] = true;
-            header("Location: accueil.php");
+            $_SESSION['id'] = $user['id'];
+
+            // Redirection admin si id = 21
+            if ($user['id'] == 21) {
+                header("Location: Admin/accueil.php");
+            } else {
+                header("Location: accueil.php");
+            }
             exit();
         } else {
             echo "<script>alert('Mot de passe incorrect.');</script>";
@@ -83,6 +58,8 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
         echo "<script>alert('Aucun utilisateur trouvé avec cet email.');</script>";
     }
 }
+?>
+
 
 
 ?>
@@ -227,19 +204,23 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
             </form>
 
             <!-- Formulaire de connexion -->
-            <form action="" method="POST">
-                <h2>Connexion</h2>
-                <label for="login-email">Email :</label>
-                <input type="email" id="login-email" name="email" required>
+            <!-- Formulaire de connexion -->
+<form action="" method="POST">
+    <h2>Connexion</h2>
+    <label for="login-email">Email :</label>
+    <input type="email" id="login-email" name="email" required>
 
-                <label for="login-password">Mot de passe :</label>
-                <input type="password" id="login-password" name="password" required>
+    <label for="login-password">Mot de passe :</label>
+    <input type="password" id="login-password" name="password" required>
 
-                <button type="submit">Se connecter</button>
-                <div class="switch">
-                    <label for="toggle">Pas de compte ? Enregistrez vous!</label>
-                </div>
-            </form>
+    <input type="hidden" name="login" value="1">
+
+    <button type="submit">Se connecter</button>
+    <div class="switch">
+        <label for="toggle">Pas de compte ? Enregistrez vous!</label>
+    </div>
+</form>
+
         </div>
     </div>
 </body>
